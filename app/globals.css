@@ -3,6 +3,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --surface: #f8fafc;
+  --surface-muted: #f1f5f9;
+  --border: #e2e8f0;
+}
+
+[data-theme="dark"] {
+  --background: #0b1120;
+  --foreground: #f8fafc;
+  --surface: #111827;
+  --surface-muted: #1f2937;
+  --border: #374151;
 }
 
 @theme inline {
@@ -16,11 +27,55 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --surface: #111827;
+    --surface-muted: #1f2937;
+    --border: #374151;
   }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Dokunma hedefleri (mobil) — küçük ikon/sekme düğmeleri hariç */
+@media (max-width: 640px) {
+  button:not(.touch-compact),
+  a.rounded-2xl,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+body, .bg-slate-50, .bg-white, .bg-slate-100, .bg-slate-200 {
+  background-color: var(--surface);
+}
+
+.border-slate-200, .border-slate-100 {
+  border-color: var(--border);
+}
+
+.text-slate-900, .text-slate-950, .text-slate-800 {
+  color: var(--foreground);
+}
+
+.text-slate-500, .text-slate-600, .text-slate-700 {
+  color: rgba(var(--foreground-rgb, 23, 23, 23), 0.7);
 }

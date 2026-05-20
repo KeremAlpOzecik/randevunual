@@ -1,0 +1,58 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isletmeOwner(slug) {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/isletmeler/$(slug))
+        && get(/databases/$(database)/documents/isletmeler/$(slug)).data.uid == request.auth.uid;
+    }
+
+    function isRandevuOwner() {
+      return isSignedIn()
+        && resource.data.esnafId is string
+        && isletmeOwner(resource.data.esnafId);
+    }
+
+    // Mağaza profili — müşteri sayfası herkese okuyabilir
+    match /isletmeler/{slug} {
+      allow read: if true;
+      allow create: if isSignedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.slug == slug;
+      allow update, delete: if isSignedIn()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid;
+    }
+
+    // Randevu talepleri
+    match /randevular/{randevuId} {
+      // Takip sayfası + müsait saat kontrolü
+      allow read: if true;
+
+      allow create: if request.resource.data.status == 'pending'
+        && request.resource.data.esnafId is string
+        && request.resource.data.esnafName is string
+        && request.resource.data.customerName is string
+        && request.resource.data.customerPhone is string
+        && request.resource.data.time is string;
+
+      // Yalnızca ilgili esnaf onay/red günceller
+      allow update: if isRandevuOwner()
+        && request.resource.data.esnafId == resource.data.esnafId;
+
+      allow delete: if isRandevuOwner();
+    }
+
+    // Eski koleksiyon (varsa) — sadece okuma
+    match /esnaflar/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

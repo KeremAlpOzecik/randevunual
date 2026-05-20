@@ -1,0 +1,13 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "randevular",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "esnafId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
