@@ -70,9 +70,11 @@ export default function EsnafPage() {
     };
   }, [slug]);
 
+  const storefrontRoot = `${theme.pageBg} ${useDark ? "storefront-dark" : ""}`;
+
   if (isLoading) {
     return (
-      <main className={`flex items-center justify-center px-6 py-16 ${theme.pageBg}`}>
+      <main className={`flex items-center justify-center px-6 py-16 ${storefrontRoot}`}>
         <div className={`rounded-3xl border px-8 py-6 shadow-sm ${theme.loadingCard}`}>
           Mağaza yükleniyor...
         </div>
@@ -82,8 +84,14 @@ export default function EsnafPage() {
 
   if (error || !profile) {
     return (
-      <main className={`flex flex-col items-center justify-center gap-6 px-6 py-16 ${theme.pageBg}`}>
-        <div className="max-w-md rounded-3xl border border-red-200 bg-red-50 px-8 py-6 text-center text-red-700">
+      <main className={`flex flex-col items-center justify-center gap-6 px-6 py-16 ${storefrontRoot}`}>
+        <div
+          className={`max-w-md rounded-3xl border px-8 py-6 text-center ${
+            useDark
+              ? "border-red-500/40 bg-red-950/80 text-red-100"
+              : "border-red-200 bg-red-50 text-red-700"
+          }`}
+        >
           {error ?? "İşletme bulunamadı."}
         </div>
         <Link
@@ -97,7 +105,7 @@ export default function EsnafPage() {
   }
 
   return (
-    <main className={`${theme.pageBg} px-4 py-8 sm:px-6 sm:py-10`}>
+    <main className={`${storefrontRoot} px-4 py-8 sm:px-6 sm:py-10`}>
       <div className="mx-auto max-w-lg space-y-6">
         <div
           className={`overflow-hidden rounded-[1.75rem] border shadow-sm ${theme.cardBorder} ${theme.card}`}

@@ -109,7 +109,7 @@ function KayitForm() {
   }
 
   return (
-    <main className="mx-auto min-h-screen max-w-4xl px-4 py-8 text-slate-900 sm:px-6 sm:py-12">
+    <main className="mx-auto min-h-screen max-w-4xl bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 sm:py-12">
       <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xl sm:rounded-[2rem] sm:p-10">
         <div className="mb-8">
           <p className="text-sm uppercase tracking-[0.28em] text-emerald-700">Esnaf Kayıt</p>

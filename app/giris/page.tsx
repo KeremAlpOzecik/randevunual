@@ -54,7 +54,7 @@ function GirisForm() {
   }
 
   return (
-    <main className="mx-auto min-h-screen max-w-4xl px-4 py-8 text-slate-900 sm:px-6 sm:py-12">
+    <main className="mx-auto min-h-screen max-w-4xl bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 sm:py-12">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
         <section className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-6 text-white shadow-xl sm:rounded-[2rem] sm:p-10">
           <span className="inline-flex rounded-full bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.28em] text-slate-200">

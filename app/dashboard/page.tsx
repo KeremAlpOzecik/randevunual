@@ -22,6 +22,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import MobilePreview from "../components/mobile-preview";
 import CopyToast from "../components/copy-toast";
 import AvailabilityEditor from "../components/availability-editor";
+import StoreQrPrint from "../components/store-qr-print";
 
 type Randevu = {
   id: string;
@@ -473,7 +474,7 @@ function DashboardPageContent() {
   }
 
   return (
-    <main className="mx-auto min-h-screen max-w-7xl px-4 py-6 text-slate-900 sm:px-6 sm:py-10">
+    <main className="mx-auto min-h-screen max-w-7xl bg-slate-50 px-4 py-6 text-slate-900 sm:px-6 sm:py-10">
       <div className="rounded-2xl bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -536,6 +537,16 @@ function DashboardPageContent() {
           </button>
         </div>
       </div>
+
+      {profile?.slug ? (
+        <StoreQrPrint
+          businessName={profile.isletmeAdi}
+          slug={profile.slug}
+          accentColor={currentAccent}
+          slogan={profile.slogan}
+        />
+      ) : null}
+
       <CopyToast visible={toastVisible} message={toastMessage} onClose={() => setToastVisible(false)} />
 
       {pendingRandevular.length > 0 ? (
@@ -577,7 +588,7 @@ function DashboardPageContent() {
                   className={`inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-3 text-sm font-semibold transition-all sm:px-5 ${
                     selectedTab === "requests"
                       ? "bg-black text-white shadow-sm"
-                      : "text-gray-500 hover:text-slate-700"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Randevu Talepleri
@@ -593,7 +604,7 @@ function DashboardPageContent() {
                   className={`shrink-0 rounded-full px-4 py-3 text-sm font-semibold transition-all sm:px-5 ${
                     selectedTab === "profile"
                       ? "bg-black text-white shadow-sm"
-                      : "text-gray-500 hover:text-slate-700"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Mağaza Ayarları
